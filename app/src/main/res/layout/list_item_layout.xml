@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.cardview.widget.CardView
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    app:cardCornerRadius="4dp"
+    app:cardMaxElevation="2dp"
+    app:cardElevation="1dp"
+    android:layout_marginLeft="12dp"
+    android:layout_centerInParent="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="time"
+            android:layout_marginTop="6dp"/>
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_title"
+            android:text="temperature"
+            android:textColor="#000"
+            android:layout_marginTop="6dp"/>
+        <TextView
+            android:id="@+id/des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/temp"
+            android:text="temperature"
+            android:textColor="#000"
+            android:layout_marginTop="6dp"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
