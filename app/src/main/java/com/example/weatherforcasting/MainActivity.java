@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-TextView t1_temp,t2_city,t3_description,t4_date,t1,t2,t3,t4,t5,ti1,temp1,des1;
+//TextView t1_temp,t2_city,t3_description,t1,t2,t3,t4,t5,t4_date,ti1,temp1,des1;
 RequestQueue requestQueue;
 Button bt_getlocation;
 RecyclerView.LayoutManager layoutManager;
@@ -57,21 +57,21 @@ FusedLocationProviderClient fusedLocationProviderClient;
 
         requestQueue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_main);
-        t1_temp=findViewById(R.id.textview1);
-        t2_city=findViewById(R.id.textview3);
-        t3_description=findViewById(R.id.textview4);
-        t4_date=findViewById(R.id.textview2);
-        bt_getlocation=findViewById(R.id.bt_location);
-        t1=findViewById(R.id.tv1);
-        t2=findViewById(R.id.tv2);
-        t3=findViewById(R.id.tv3);
-        t4=findViewById(R.id.tv4);
-        t5=findViewById(R.id.tv5);
+//        t1_temp=findViewById(R.id.textview1);
+//        t2_city=findViewById(R.id.textview3);
+//        t3_description=findViewById(R.id.textview4);
+//        t4_date=findViewById(R.id.textview2);
+//        bt_getlocation=findViewById(R.id.bt_location);
+//        t1=findViewById(R.id.tv1);
+//        t2=findViewById(R.id.tv2);
+//        t3=findViewById(R.id.tv3);
+//        t4=findViewById(R.id.tv4);
+//        t5=findViewById(R.id.tv5);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        bt_getlocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        bt_getlocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(MainActivity.this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                     getLocation();
@@ -80,10 +80,10 @@ FusedLocationProviderClient fusedLocationProviderClient;
                     ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
 
                 }
-            }
-        });
+//            }
+//        });
 
-        find_weather();
+   //     find_weather();
         weatherforcast();
 
     }
@@ -103,31 +103,31 @@ FusedLocationProviderClient fusedLocationProviderClient;
 
                         lat = addresses.get(0).getLatitude();
                         lon = addresses.get(0).getLongitude();
-                        //set Latitude on Textview
-                        t1.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Latitude :</b><br></font>"
-                                + addresses.get(0).getLatitude()
-                        ));
-                        //set longitude
-                        t2.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Longitude :</b><br></font>"
-                                        + addresses.get(0).getLongitude()
-                        ));
-                        //set country name
-                        t3.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Country Name :</b><br></font>"
-                                        + addresses.get(0).getCountryName()
-                        ));
-                        //set locality
-                        t4.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Locality :</b><br></font>"
-                                        + addresses.get(0).getLocality()
-                        ));
-                        //set address
-                        t5.setText(Html.fromHtml(
-                                "<font color='#6200EE'><b>Address :</b><br></font>"
-                                        + addresses.get(0).getAddressLine(0)
-                        ));
+//                        //set Latitude on Textview
+//                        t1.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Latitude :</b><br></font>"
+//                                + addresses.get(0).getLatitude()
+//                        ));
+//                        //set longitude
+//                        t2.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Longitude :</b><br></font>"
+//                                        + addresses.get(0).getLongitude()
+//                        ));
+//                        //set country name
+//                        t3.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Country Name :</b><br></font>"
+//                                        + addresses.get(0).getCountryName()
+//                        ));
+//                        //set locality
+//                        t4.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Locality :</b><br></font>"
+//                                        + addresses.get(0).getLocality()
+//                        ));
+//                        //set address
+//                        t5.setText(Html.fromHtml(
+//                                "<font color='#6200EE'><b>Address :</b><br></font>"
+//                                        + addresses.get(0).getAddressLine(0)
+//                        ));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -135,52 +135,52 @@ FusedLocationProviderClient fusedLocationProviderClient;
             }
         });
     }
-    public void find_weather() {
-        String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=3aec92dea777a013fd9ee9c488d58e2e&units=Imperial";
-        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                {
-
-                    try {
-                        JSONObject main_object = response.getJSONObject("main");
-                        JSONArray array = response.getJSONArray("weather");
-                        JSONObject object = array.getJSONObject(0);
-                        String temp = String.valueOf(main_object.getDouble(("temp")));
-                        String description = object.getString("description");
-
-                        t1_temp.setText(temp);
-                        t2_city.setText(response.getString("name"));
-                        t3_description.setText(description);
-
-                        Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat sdf = new SimpleDateFormat("EEEE-MM-dd");
-                        String formatted_date = sdf.format(calendar.getTime());
-
-                        t4_date.setText(formatted_date);
-
-                        double temp_int = Double.parseDouble(temp);
-                        double centi = (temp_int - 32) / 1.8000;
-                        centi = Math.round(centi);
-                        int i = (int) centi;
-                        t1_temp.setText(String.valueOf(i)+"°C");
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        );
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(jor);
-    }
+//    public void find_weather() {
+//        String url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=3aec92dea777a013fd9ee9c488d58e2e&units=Imperial";
+//        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                {
+//
+//                    try {
+//                        JSONObject main_object = response.getJSONObject("main");
+//                        JSONArray array = response.getJSONArray("weather");
+//                        JSONObject object = array.getJSONObject(0);
+//                        String temp = String.valueOf(main_object.getDouble(("temp")));
+//                        String description = object.getString("description");
+//
+//                        t1_temp.setText(temp);
+//                        t2_city.setText(response.getString("name"));
+//                        t3_description.setText(description);
+//
+//                        Calendar calendar = Calendar.getInstance();
+//                        SimpleDateFormat sdf = new SimpleDateFormat("EEEE-MM-dd");
+//                        String formatted_date = sdf.format(calendar.getTime());
+//
+//                        t4_date.setText(formatted_date);
+//
+//                        double temp_int = Double.parseDouble(temp);
+//                        double centi = (temp_int - 32) / 1.8000;
+//                        centi = Math.round(centi);
+//                        int i = (int) centi;
+//                        t1_temp.setText(String.valueOf(i)+"°C");
+//
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//        );
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        queue.add(jor);
+//    }
     public void weatherforcast(){
     String urll = "http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=3aec92dea777a013fd9ee9c488d58e2e&units=Imperial";
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urll, null,
