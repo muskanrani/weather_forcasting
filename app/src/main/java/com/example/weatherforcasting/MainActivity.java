@@ -182,7 +182,7 @@ FusedLocationProviderClient fusedLocationProviderClient;
 //        queue.add(jor);
 //    }
     public void weatherforcast(){
-    String urll = "http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=3aec92dea777a013fd9ee9c488d58e2e&units=Imperial";
+    String urll = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=3aec92dea777a013fd9ee9c488d58e2e&units=Imperial";
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, urll, null,
             new Response.Listener<JSONObject>() {
                 @Override
